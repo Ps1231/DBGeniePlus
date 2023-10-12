@@ -7,6 +7,10 @@
 3. [Installation](#installation)
 4. [Usage](#usage)
 5. [YAML File Format](#yamlfileformat)
+6. [Customization](#customization)
+7. [Dependencies](#dependencies)
+8. [Contributing](#contributing)
+9. [Acknowledgments](#acknowledgments)
 <br>
    
 ## 1. Introduction <a name="introduction"></a>
@@ -45,12 +49,11 @@ sudo apt install git
 brew install git
 ```
 #### Windows
-```bash
 Download the Git installer from [Git for Windows] (https://gitforwindows.org/) and follow the installation steps.
-```
+<br></br>
 ### 3.2  Installing Python
 You can download Python from the official website [Python.org](https://www.python.org/downloads/) and follow the installation instructions for your specific OS.
-
+<br></br>
 ### 3.3  Installing MySQL Server
 Follow the official installation instructions for MySQL based on your OS:
 -[MySQL Installation Guide for Linux](https://dev.mysql.com/doc/mysql-installation-excerpt/5.7/en/linux-installation.html)
@@ -59,16 +62,28 @@ Follow the official installation instructions for MySQL based on your OS:
 
 <br>
 
-## 4. Usage  <a name="usage"></a>
+## 4. Usage  <a name="usage"></a> 
 
-1. Create a YAML configuration file that specifies the database details and table structure. See the YAML File Format section for details.
+### 4.1 Clone the Repository
+To get started, clone this repository using Git:
+```bash
+git clone https://github.com/Ps1231/Automatic-Database-Generator-and-Populator
+```
+### 4.2 Navigate to the Project Directory
+Change your working directory to the project folder:
+```bash
+cd Automatic-Database-Generator-and-Populator
+```
+### 4.3  Create a YAML configuration file 
+This specifies the database details and table structure. See the YAML File Format section for details.
+
    
-2. Run the main.py script with the YAML file as an argument:
+### 4.4 Run the Application
+Run the main.py script with the YAML file as an argument:
 ```bash
  python main.py your_yaml_file.yaml
 ```
-
-3. The script will generate the database schema and populate the tables with data based on the configuration in the YAML file.
+ The script will generate the database schema and populate the tables with data based on the configuration in the YAML file.
 
 <br>
 
@@ -100,5 +115,31 @@ table_definition:
 # Define additional tables and configurations as needed
 ```
 Sample yaml file is given here as config.yaml
+- <TableName>: The name of the table.
+- <Column1_Name>: The name of a column in the table.
+- <Column1_DataType>: The data type of the column.
+- primary_key: Adding Primary key column of the table. (Can have composite primary key)
+- <PrimaryKey_Column_Name>: The name of primary key column.
+- foreign_keys: Adding foreign key detai of the table.
+- <fk_column>: The name foreign key column.
+- <references_table>: The name referenced table for foreign key.
+- <references_column>: The name referenced column for foreign key.
+<br></br>
+## 6. Customization <a name="customization"></a>
+You can customize the number of entries generated for each table by modifying the num_entries variable in the main.py script.
+<br></br>
+## 7. Dependencies <a name="dependencies"></a>
+- ArgumentParser: Used to give YAML file as argument from terminal.
+- PyYAML: Used for parsing YAML configuration files.
+- Faker: Used for generating fake data.
+- Pymysql: Used for Database connectivity.
+<br></br>
+## 8. Contributing <a name="contributing"></a>
+Contributions are welcome! If you have any suggestions or improvements, please open an issue or create a pull request.
+<br></br>
+## 9. Acknowledgments <a name="acknowledgments"></a>
+The project uses the Faker library for generating fake data.
+Thanks to SQLAlchemy and PyYAML for their great libraries that make this project possible.
+
 
 
