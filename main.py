@@ -1,0 +1,4 @@
+from DatabaseCreator import create_mysql_tables_from_yaml
+from ArgumentParser import parse_arguments
+config_file_path = parse_arguments()
+create_mysql_tables_from_yaml(config_file_path)

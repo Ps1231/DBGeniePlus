@@ -1,0 +1,176 @@
+mysql:
+  host: localhost
+  user: root
+  password: rashi@2003
+  database: Multiplex1
+
+table_definition:
+  Genres:
+    columns:
+      - ID: INT AUTO_INCREMENT PRIMARY KEY
+      - Genre_Name: VARCHAR(100) UNIQUE NOT NULL
+
+  User:
+    columns:
+      - User_ID: INT AUTO_INCREMENT PRIMARY KEY
+      - First_Name: VARCHAR(100) NOT NULL
+      - Last_Name: VARCHAR(100) NOT NULL
+      - Contact_Number: BIGINT NOT NULL
+      - Email: VARCHAR(100) UNIQUE NOT NULL
+      - Password_Hash: VARCHAR(255) NOT NULL
+      - City: VARCHAR(20) NOT NULL
+      - State: VARCHAR(10) NOT NULL
+
+    # constraints:
+    #   - name: chk_contact_number
+    #     condition: CHECK (Contact_Number REGEXP '^[0-9]{10}$')
+    #   - name: chk_valid_email
+    #     condition: CHECK (Email REGEXP '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$'))
+
+  User_Genre:
+    columns:
+      - User_ID: INT
+      - Genre_ID: INT NOT NULL
+    foreign_keys:
+      - fk_column: User_ID
+        references_table: User
+        references_column: User_ID
+      - fk_column: Genre_ID
+        references_table: Genres
+        references_column: ID
+    primary_key:
+      - User_ID
+      - Genre_ID
+
+  Movies:
+    columns:
+      - Movie_ID: INT(5) PRIMARY KEY
+      - Movie_Name: VARCHAR(20) NOT NULL UNIQUE
+      - Movie_Type: ENUM('2D', '3D')
+      - Release_Date: DATE
+      - Movie_Description: TEXT(200) NOT NULL
+
+  Movie_Genre:
+    columns:
+      - Movie_Id: INT
+      - Genre_ID: INT NOT NULL
+    foreign_keys:
+      - fk_column: Movie_Id
+        references_table: Movies
+        references_column: Movie_ID
+      - fk_column: Genre_ID
+        references_table: Genres
+        references_column: ID
+    primary_key:
+      - Movie_Id
+      - Genre_ID
+
+  Reviews:
+    columns:
+      - Movie_ID: INT
+      - User_ID: INT
+      - Rating: ENUM('1','2','3')
+      - Review_Text: TEXT(200)
+      - Time: DATETIME
+    foreign_keys:
+      - fk_column: Movie_ID
+        references_table: Movies
+        references_column: Movie_ID
+      - fk_column: User_ID
+        references_table: User
+        references_column: User_ID
+    primary_key:
+      - Movie_ID
+      - User_ID
+
+  Theatre:
+    columns:
+      - ID: INT PRIMARY KEY
+      - Name: VARCHAR(100) NOT NULL
+      - Address: TEXT(200) NOT NULL
+      - Num_Of_Halls: INT NOT NULL
+      - Type: ENUM('Cancellable', 'Non-Cancellable') NOT NULL
+
+  Theatre_Hall:
+    columns:
+      - Hall_No: INT
+      - Total_Seats: INT NOT NULL
+      - Seats_Sold: INT NOT NULL
+      - Theatre_ID: INT NOT NULL
+    foreign_keys:
+      - fk_column: Theatre_ID
+        references_table: Theatre
+        references_column: ID
+    primary_key:
+      - Hall_No
+      - Theatre_ID
+
+  Timing_Slots:
+    columns:
+      - Slot_ID: INT AUTO_INCREMENT PRIMARY KEY
+      - Start_Time: TIME NOT NULL
+      - End_Time: TIME NOT NULL
+      - From_Date: DATE NOT NULL
+      - To_Date: DATE NOT NULL
+      - Hall_No: INT NOT NULL
+      - Movie_ID: INT NOT NULL
+    foreign_keys:
+      - fk_column: Hall_No
+        references_table: Theatre_Hall
+        references_column: Hall_No
+      - fk_column: Movie_ID
+        references_table: Movies
+        references_column: Movie_ID
+
+  Seat_Price:
+    columns:
+      - Hall_ID: INT
+      - Seat_Type: ENUM('Recliner', 'Gold', 'Loungers') NOT NULL
+      - Price: DECIMAL(4, 2) NOT NULL
+    primary_key:
+      - Hall_ID
+      - Seat_Type
+      - Price
+    foreign_keys:
+      - fk_column: Hall_ID
+        references_table: Theatre_Hall
+        references_column: Hall_No
+
+  Seats:
+    columns:
+      - ID: INT
+      - Seat_ID: INT
+      - slot_ID: INT
+      - Seat_Type: ENUM('Recliner', 'Gold', 'Loungers') NOT NULL
+      - Status: ENUM('Sold', 'Available') NOT NULL
+    primary_key:
+      - ID
+    foreign_keys:
+      - fk_column: slot_ID
+        references_table: Timing_Slots
+        references_column: Slot_ID
+
+  Payment_Method:
+    columns:
+      - ID: INT AUTO_INCREMENT PRIMARY KEY
+      - Method_Name: VARCHAR(50) UNIQUE
+  Booking:
+    columns:
+      - Booking_ID: INT AUTO_INCREMENT PRIMARY KEY
+      - user_ID: INT NOT NULL
+      - Booking_Time: DATETIME NOT NULL
+      - Payment_Status: ENUM('Pending', 'Paid', 'Cancelled') NOT NULL
+      - Transaction_ID: VARCHAR(50) UNIQUE
+      - Payment_Method_ID: INT NOT NULL
+      - seat_ID: INT
+      - slot_ID: INT
+    foreign_keys:
+      - fk_column: seat_ID
+        references_table: Seats
+        references_column: ID
+      - fk_column: user_ID
+        references_table: User
+        references_column: User_ID
+      - fk_column: Payment_Method_ID
+        references_table: Payment_Method
+        references_column: ID
