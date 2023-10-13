@@ -28,7 +28,7 @@ Before you begin, ensure you have met the following requirements:
   
 - Install required libraries using pip from terminal
   ```bash
-  pip install pymysql pyyaml faker ArgumentParser
+  pip install -r requirement.txt
   ```
 <br>
 
@@ -94,7 +94,7 @@ mysql:
   user: your_database_user
   password: your_database_password
   database: your_database_name
-
+  num_records: no_of _records_to_be_generated
 table_definition:
   TableName:
     columns:
@@ -126,7 +126,7 @@ Sample yaml file is given here as config.yaml
 - <references_column>: The name referenced column for foreign key.
 <br></br>
 ## 6. Customization <a name="customization"></a>
-You can customize the number of entries generated for each table by modifying the num_entries variable in the main.py script.
+You can customize the number of entries generated for each table by modifying the num_records variable in your Yaml file.
 <br></br>
 ## 7. Dependencies <a name="dependencies"></a>
 - ArgumentParser: Used to give YAML file as argument from terminal.
