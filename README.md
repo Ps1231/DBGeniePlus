@@ -126,7 +126,8 @@ Sample yaml file is given here as config.yaml
 - <references_column>: The name referenced column for foreign key.
 <br></br>
 ## 6. Customization <a name="customization"></a>
-You can customize the number of entries generated for each table by modifying the num_records variable in your Yaml file.
+You can customize various aspects of the database generation and population process to suit your specific needs.
+You can customize the number of entries generated for each table by modifying the num_records variable in your Yaml file creating customized yaml file using given template.
 <br></br>
 ## 7. Dependencies <a name="dependencies"></a>
 - ArgumentParser: Used to give YAML file as argument from terminal.
