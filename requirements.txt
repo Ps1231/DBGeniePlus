@@ -1,0 +1,7 @@
+argumentparser==1.2.1
+Faker==19.10.0
+mysql-connector==2.2.9
+PyMySQL==1.1.0
+python-dateutil==2.8.2
+PyYAML==6.0.1
+six==1.16.0
