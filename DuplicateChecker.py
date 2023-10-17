@@ -1,10 +1,9 @@
 import mysql.connector as mysql
 from FakeDataGenerator import generate_regular_fake_data
 import mysql.connector as mysql
-
 import random
 
-
+# Function to check and remove Duplicate entries
 def checker(connection, config, table_name, table_data, column_name, fake_data, column_info):
     cursor = connection.cursor()
     query = f"SELECT {column_name} FROM {table_name} WHERE {column_name} = %s"
@@ -17,8 +16,8 @@ def checker(connection, config, table_name, table_data, column_name, fake_data, 
 
     return fake_data
 
-
-def checkerf(connection, config, table_name, table_data, column_name, fake_data, column_info, referenced_table, referenced_column, values):
+# Function to check and remove Duplicate entries in foreign key
+def checkerForForeignKey(connection, config, table_name, table_data, column_name, fake_data, column_info, referenced_table, referenced_column, values):
     cursor = connection.cursor()
 
     query = f"SELECT {column_name} FROM {table_name} WHERE {column_name} = %s"
