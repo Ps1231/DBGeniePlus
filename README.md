@@ -1,4 +1,4 @@
-# Automatic-Database-Generator-and-Populator
+# "DBGeniePlus" (Enhanced Database Generation and Population)
 <br>
 
 ## Table of Contents
