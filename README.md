@@ -1,4 +1,4 @@
-# "DBGeniePlus" (Enhanced Database Generation and Population)
+# "DBGeniePlus" (Enhanced Database Generator and Populator)
 <br>
 
 ## Table of Contents
