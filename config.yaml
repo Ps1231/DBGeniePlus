@@ -1,7 +1,7 @@
 mysql:
   host: localhost
   user: root
-  password: rashi@2003
+  password: <your password>
   database: Multiplex1
 
 table_definition:

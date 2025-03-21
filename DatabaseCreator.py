@@ -57,6 +57,7 @@ def create_mysql_tables_from_yaml(config_file_path):
                     create_table_query += (
                         f"FOREIGN KEY ({fk['fk_column']}) "
                         f"REFERENCES {fk['references_table']}({fk['references_column']}), "
+                        f"ON DELETE CASCADE ON UPDATE CASCADE, "
                     )
 
             create_table_query = create_table_query.rstrip(', ') + ");"
